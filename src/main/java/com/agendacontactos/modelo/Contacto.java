@@ -14,27 +14,23 @@ public class Contacto {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //IDENTITY:sea auto incrementable
     private Integer id;
 
-    //blan:  no permita datos en blaco
     @NotBlank(message = "Debe ingresar su nombre")
     private String nombre;
 
     @NotBlank(message = "Debe ingresar # celular")
     private String celular;
 
-    //Empty: para q no este vacio
     @NotEmpty(message = "Debe ingresar su email")
-    @Email //q lleve el formato email
+    @Email
     private String email;
 
-    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)//le indico el formato de fecha
-    @Past //le indico q solo acepte fechas registro q hayan nacido en el pasado, no en el presente ni el futuro
-    @NotNull(message = "Debe ingresar su fecha de nacmiento") //no permita datos nulos
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
+    @Past
+    @NotNull(message = "Debe ingresar su fecha de nacmiento")
     private LocalDate fechaNacimiento;
 
     private LocalDateTime fechaRegistro;
 
-    //fechaRegistro: con este metodo me ayuda persistir la fecha siempre
-    //cuando se cree un objeto le voy asigar por defecto la fecha y hora de hoy
     @PrePersist
     public void asignarFechaRegistro() {
         fechaRegistro = LocalDateTime.now();
